@@ -1,0 +1,6 @@
+data/io.github.axtloss.davinciresolver.desktop.in
+data/io.github.axtloss.davinciresolver.appdata.xml.in
+data/io.github.axtloss.davinciresolver.gschema.xml
+src/main.py
+src/window.py
+src/window.ui
