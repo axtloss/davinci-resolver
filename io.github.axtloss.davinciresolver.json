@@ -3,7 +3,7 @@
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "44",
     "sdk" : "org.gnome.Sdk",
-    "command" : "davinciresolver",
+    "command" : "davinci-resolver",
     "finish-args" : [
         "--share=network",
         "--share=ipc",
@@ -24,13 +24,13 @@
     ],
     "modules" : [
         {
-            "name" : "davinciresolver",
+            "name" : "davinci-resolver",
             "builddir" : true,
             "buildsystem" : "meson",
             "sources" : [
                 {
-                    "type" : "git",
-                    "url" : "file:///home/axtlos/Projects"
+                    "type" : "dir",
+                    "path" : "/home/axtlos/Projects/davinciresolver"
                 }
             ]
         }

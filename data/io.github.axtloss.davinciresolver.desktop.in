@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=davinciresolver
-Exec=davinciresolver
+Name=davinci-resolver
+Exec=davinci-resolver
 Icon=io.github.axtloss.davinciresolver
 Terminal=false
 Type=Application

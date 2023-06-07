@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="Adw" version="1.0"/>
+  <template class="DavinciEntry" parent="AdwActionRow">
+    <property name="title">Davinci</property>
+    <child>
+      <object class="GtkBox" id="entryBox">
+        <property name="spacing">10</property>
+        <child>
+          <object class="GtkButton" id="button">
+            <property name="valign">center</property>
+            <property name="halign">center</property>
+            <property name="icon-name">media-playback-start-symbolic</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

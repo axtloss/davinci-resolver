@@ -24,10 +24,10 @@ gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Gio, Adw
-from .window import DavinciresolverWindow
+from .window import DavinciResolverWindow
 
 
-class DavinciresolverApplication(Adw.Application):
+class DavinciResolverApplication(Adw.Application):
     """The main application singleton class."""
 
     def __init__(self):
@@ -45,13 +45,13 @@ class DavinciresolverApplication(Adw.Application):
         """
         win = self.props.active_window
         if not win:
-            win = DavinciresolverWindow(application=self)
+            win = DavinciResolverWindow(application=self)
         win.present()
 
     def on_about_action(self, widget, _):
         """Callback for the app.about action."""
         about = Adw.AboutWindow(transient_for=self.props.active_window,
-                                application_name='davinciresolver',
+                                application_name='davinci-resolver',
                                 application_icon='io.github.axtloss.davinciresolver',
                                 developer_name='Unknown',
                                 version='0.1.0',
@@ -81,5 +81,5 @@ class DavinciresolverApplication(Adw.Application):
 
 def main(version):
     """The application's entry point."""
-    app = DavinciresolverApplication()
+    app = DavinciResolverApplication()
     return app.run(sys.argv)

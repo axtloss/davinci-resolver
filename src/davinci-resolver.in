@@ -1,4 +1,6 @@
-# window.py
+#!@PYTHON@
+
+# davinci-resolver.in
 #
 # Copyright 2023 Unknown
 #
@@ -17,22 +19,28 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw
-from gi.repository import Gtk
-from davinci_resolver.widgets.entry import DavinciEntry
-from davinci_resolver.widgets.tag import DavinciTag
+import os
+import sys
+import signal
+import locale
+import gettext
 
-@Gtk.Template(resource_path='/io/github/axtloss/davinciresolver/window.ui')
-class DavinciResolverWindow(Adw.ApplicationWindow):
-    __gtype_name__ = 'DavinciResolverWindow'
+VERSION = '@VERSION@'
+pkgdatadir = '@pkgdatadir@'
+localedir = '@localedir@'
 
-    versionList: Gtk.ListBox = Gtk.Template.Child()
+sys.path.insert(1, pkgdatadir)
+signal.signal(signal.SIGINT, signal.SIG_DFL)
+locale.bindtextdomain('davinci-resolver', localedir)
+locale.textdomain('davinci-resolver')
+gettext.install('davinci-resolver', localedir)
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        test=DavinciEntry()
-        tag=DavinciTag(labelType=0)
-        betaTag=DavinciTag(labelType=1)
-        test.add_tag(tag)
-        test.add_tag(betaTag)
-        self.versionList.append(test)
+if __name__ == '__main__':
+    import gi
+
+    from gi.repository import Gio
+    resource = Gio.Resource.load(os.path.join(pkgdatadir, 'davinci-resolver.gresource'))
+    resource._register()
+
+    from davinci_resolver import main
+    sys.exit(main.main(VERSION))

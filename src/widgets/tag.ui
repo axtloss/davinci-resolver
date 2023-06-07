@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="DavinciTag" parent="GtkLabel">
+    <property name="label">type</property>
+    <property name="vexpand">false</property>
+    <property name="margin-top">10</property>
+    <property name="margin-bottom">10 </property>
+  </template>
+</interface>

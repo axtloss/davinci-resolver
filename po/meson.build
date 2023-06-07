@@ -1,1 +1,1 @@
-i18n.gettext('davinciresolver', preset: 'glib')
+i18n.gettext('davinci-resolver', preset: 'glib')

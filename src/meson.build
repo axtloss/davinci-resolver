@@ -1,9 +1,9 @@
 pkgdatadir = join_paths(get_option('prefix'), get_option('datadir'), meson.project_name())
-moduledir = join_paths(pkgdatadir, 'davinciresolver')
+moduledir = join_paths(pkgdatadir, 'davinci_resolver')
 gnome = import('gnome')
 
-gnome.compile_resources('davinciresolver',
-  'davinciresolver.gresource.xml',
+gnome.compile_resources('davinci-resolver',
+  'davinci-resolver.gresource.xml',
   gresource_bundle: true,
   install: true,
   install_dir: pkgdatadir,
@@ -18,18 +18,20 @@ conf.set('localedir', join_paths(get_option('prefix'), get_option('localedir')))
 conf.set('pkgdatadir', pkgdatadir)
 
 configure_file(
-  input: 'davinciresolver.in',
-  output: 'davinciresolver',
+  input: 'davinci-resolver.in',
+  output: 'davinci-resolver',
   configuration: conf,
   install: true,
   install_dir: get_option('bindir'),
   install_mode: 'r-xr--r--'
 )
 
-davinciresolver_sources = [
+davinci_resolver_sources = [
   '__init__.py',
   'main.py',
   'window.py',
 ]
 
-install_data(davinciresolver_sources, install_dir: moduledir)
+install_data(davinci_resolver_sources, install_dir: moduledir)
+
+subdir('widgets')
