@@ -30,8 +30,10 @@ davinci_resolver_sources = [
   '__init__.py',
   'main.py',
   'window.py',
+  '../versions.json'
 ]
 
 install_data(davinci_resolver_sources, install_dir: moduledir)
 
 subdir('widgets')
+subdir('classes')

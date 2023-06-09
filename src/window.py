@@ -17,6 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import json
 from gi.repository import Adw
 from gi.repository import Gtk
 from davinci_resolver.widgets.entry import DavinciEntry
@@ -30,9 +31,21 @@ class DavinciResolverWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        test=DavinciEntry()
-        tag=DavinciTag(labelType=0)
-        betaTag=DavinciTag(labelType=1)
-        test.add_tag(tag)
-        test.add_tag(betaTag)
-        self.versionList.append(test)
+        self.parse_versions_file()
+
+    def parse_versions_file(self):
+        content=""
+        with open("/app/share/davinci-resolver/davinci_resolver/versions.json", "r") as file:
+            content=file.read()
+        parsed = json.loads(content)
+        for entry in parsed.get('versions'):
+            gtkEntry = DavinciEntry(name=entry.get('name'), version=entry.get('version'),
+                                    url=entry.get('url'), downloadid=entry.get('downloadid'))
+            for tag in entry.get('tags'):
+                if tag.strip().lower() == "studio":
+                    tag=DavinciTag(labelType=0)
+                elif tag.strip().lower() == "beta":
+                    tag=DavinciTag(labelType=1)
+                gtkEntry.add_tag(tag)
+            self.versionList.append(gtkEntry)
+            

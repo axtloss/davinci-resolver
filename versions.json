@@ -1,0 +1,32 @@
+{
+  "versions": [
+    {
+      "name": "Davinci Resolve",
+      "tags": [],
+      "version": "18.1.4",
+      "url": "https://www.blackmagicdesign.com/api/register/us/download/%ID%",
+      "downloadid": "6449dc76e0b845bcb7399964b00a3ec4"
+    },
+    {
+      "name": "Davinci Resolve Studio",
+      "tags": ["studio"],
+      "version": "18.1.4",
+      "url": "https://www.blackmagicdesign.com/api/register/us/download/%ID%",
+      "downloadid": "bb935a0d0e814961b7a75a2ded811b01"
+    },
+    {
+      "name": "Davinci Resolve Beta",
+      "tags": ["beta"],
+      "version": "18.5",
+      "url": "https://www.blackmagicdesign.com/api/register/us/download/%ID%",
+      "downloadid": "2d93ebed9de346f7a2de370ed2ba0993"
+    },
+    {
+      "name": "Davinci Resolve Studio Beta",
+      "tags": ["beta", "studio"],
+      "version": "18.5",
+      "url": "https://www.blackmagicdesign.com/api/register/us/download/%ID%",
+      "downloadid": "3aa10016dd61468da7081cac053cb6d5"
+    }
+  ]
+}
