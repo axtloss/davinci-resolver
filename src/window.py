@@ -53,6 +53,7 @@ class DavinciResolverWindow(Adw.ApplicationWindow):
         for entry in parsed.get('versions'):
             gtkEntry = DavinciEntry(name=entry.get('name'), version=entry.get('version'),
                                     url=entry.get('url'), downloadid=entry.get('downloadid'))
+            print(entry.get('downloadid'))
             for tag in entry.get('tags'):
                 if tag.strip().lower() == "studio":
                     tag=DavinciTag(labelType=0)

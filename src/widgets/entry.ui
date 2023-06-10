@@ -3,6 +3,7 @@
   <requires lib="gtk" version="4.0"/>
   <requires lib="Adw" version="1.0"/>
   <template class="DavinciEntry" parent="AdwActionRow">
+    <property name="selectable">false</property>
     <property name="title">Davinci</property>
     <child>
       <object class="GtkBox" id="entryBox">

@@ -16,6 +16,8 @@
 #
 # SPDX-License-Identifier: GPL-3.0-only
 
+import json
+
 class UserData:
 
     firstname: str
@@ -46,3 +48,17 @@ class UserData:
         self.state = state
         self.city = city
         self.product = product
+
+    def get_json(self):
+        data = {
+            "firstname": self.firstname,
+            "lastname": self.lastname,
+            "email": self.email,
+            "phone": self.phone,
+            "country": self.country,
+            "state": self.state,
+            "city": self.city,
+            "product": self.product
+        }
+
+        return json.dumps(data)

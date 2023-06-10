@@ -37,3 +37,4 @@ install_data(davinci_resolver_sources, install_dir: moduledir)
 
 subdir('widgets')
 subdir('classes')
+subdir('utils')
