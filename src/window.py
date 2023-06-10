@@ -18,6 +18,9 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import json
+import os
+from urllib import request
+from urllib import error as urlerr
 from gi.repository import Adw
 from gi.repository import Gtk
 from davinci_resolver.widgets.entry import DavinciEntry
@@ -35,8 +38,17 @@ class DavinciResolverWindow(Adw.ApplicationWindow):
 
     def parse_versions_file(self):
         content=""
-        with open("/app/share/davinci-resolver/davinci_resolver/versions.json", "r") as file:
-            content=file.read()
+
+        try:
+            for line in request.urlopen("https://raw.githubusercontent.com/axtloss/davinci-resolver/main/versions.json"):
+                content=content+line.decode('utf-8')
+            with open(os.getenv('HOME')+'/.var/app/io.github.axtloss.davinciresolver/data/versions.json', 'w') as file:
+                file.write(content)
+        except urlerr.URLError:
+            print('no internet, using cached file')
+            with open(os.getenv('HOME')+'/.var/app/io.github.axtloss.davinciresolver/data/versions.json', 'r') as file:
+                content=file.read()
+
         parsed = json.loads(content)
         for entry in parsed.get('versions'):
             gtkEntry = DavinciEntry(name=entry.get('name'), version=entry.get('version'),

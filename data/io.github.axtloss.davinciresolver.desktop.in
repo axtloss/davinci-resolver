@@ -2,7 +2,9 @@
 Name=davinci-resolver
 Exec=davinci-resolver
 Icon=io.github.axtloss.davinciresolver
+Comment=A utility to manage davinci resolve
 Terminal=false
 Type=Application
-Categories=GTK;
+Categories=GTK;Utility
+Keywords=davinci resolve;video;editing;video editing
 StartupNotify=true
