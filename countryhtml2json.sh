@@ -20,14 +20,16 @@ sed 's|<option label=|\t|g' countries.tmp2 > countries.tmp
 # Remove the value for each country shorthand
 sed 's| value="string:|: "|g' countries.tmp > countries.tmp2
 
+sed 's| selected="selected"||g' countries.tmp2 > countries.tmp
+
 # Create the json file
 echo '{' > countries.json
 
 # Remove the rest of the option syntax
-sed 's|">.*|",|g' countries.tmp2 >> countries.json
+sed 's|">.*|",|g' countries.tmp >> countries.json
 
 # Remove the last , in the list
-truncate -s -3 countries.json
+truncate -s -2 countries.json
 
 # close the json object
 echo -e '\n}' >> countries.json
