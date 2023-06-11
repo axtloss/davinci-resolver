@@ -25,6 +25,7 @@ from gi.repository import Adw
 from gi.repository import Gtk
 from davinci_resolver.widgets.entry import DavinciEntry
 from davinci_resolver.widgets.tag import DavinciTag
+from davinci_resolver.windows.davinciInstallerWindow import DavinciInstallerWindow
 
 @Gtk.Template(resource_path='/io/github/axtloss/davinciresolver/window.ui')
 class DavinciResolverWindow(Adw.ApplicationWindow):
@@ -52,7 +53,7 @@ class DavinciResolverWindow(Adw.ApplicationWindow):
         parsed = json.loads(content)
         for entry in parsed.get('versions'):
             gtkEntry = DavinciEntry(name=entry.get('name'), version=entry.get('version'),
-                                    url=entry.get('url'), downloadid=entry.get('downloadid'))
+                                    url=entry.get('url'), downloadid=entry.get('downloadid'), window=self)
             print(entry.get('downloadid'))
             for tag in entry.get('tags'):
                 if tag.strip().lower() == "studio":

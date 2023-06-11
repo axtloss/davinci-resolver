@@ -22,3 +22,11 @@
   color: #26a269;
 }
 
+.registerbutton {
+  padding: 10px;
+}
+
+.registerbuttontext {
+  font-size: 15pt;
+  font-weight: bold;
+}
