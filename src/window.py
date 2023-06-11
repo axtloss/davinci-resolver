@@ -36,8 +36,6 @@ class DavinciResolverWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.parse_versions_file()
-        installer=DavinciInstallerWindow(self, **kwargs)
-        installer.present()
 
     def parse_versions_file(self):
         content=""
@@ -55,7 +53,7 @@ class DavinciResolverWindow(Adw.ApplicationWindow):
         parsed = json.loads(content)
         for entry in parsed.get('versions'):
             gtkEntry = DavinciEntry(name=entry.get('name'), version=entry.get('version'),
-                                    url=entry.get('url'), downloadid=entry.get('downloadid'))
+                                    url=entry.get('url'), downloadid=entry.get('downloadid'), window=self)
             print(entry.get('downloadid'))
             for tag in entry.get('tags'):
                 if tag.strip().lower() == "studio":

@@ -20,13 +20,37 @@ import os
 import sys
 import requests
 import zipfile
+from davinci_resolver.classes.userData import UserData
 
 class DavinciInstaller:
 
-    download_url: str
+    # This value was taken from the davinci resolve aur package
+    # https://aur.archlinux.org/packages/davinci-resolve-studio
+    # it does not mention how to get this value, but it seems to work
+    # for every version currently available
+    # TODO: Investigate where this value comes from
+    referrerid: str = "69a3995a376441d0ae23711c44370662"
 
-    def __init__(self, download_url: str):
-        self.download_url = download_url
+    downloadID: str
+    userdata: UserData
+    download_url: str
+    url: str
+
+    def __init__(self, downloadID: str, userdata: UserData, url: str):
+        self.downloadID = downloadID
+        if userdata is not None:
+            self.userdata = userdata
+        else:
+            self.userdata = userdata = UserData(firstname="Leonardo",
+                                                lastname="da Vinci",
+                                                email="leodavinci@monalisa.org", # monalisa.org is a real domain, huh
+                                                phone="363-259-518", # randomly generated
+                                                country="it",
+                                                state="",
+                                                city="Anchiano",
+                                                product="DaVinci Resolve")
+        self.url = url
+        self.download_url = self.get_src_url()
 
     def download_installer(self):
         os.mkdir(os.getenv('HOME')+'/.var/app/io.github.axtloss.davinciresolver/data/installerCache')
@@ -52,4 +76,29 @@ class DavinciInstaller:
     def extract_installer_zip(self):
         with zipfile.ZipFile(os.getenv('HOME')+'/.var/app/io.github.axtloss.davinciresolver/data/installerCache/davinci.zip', 'r') as zip_file:
             zip_file.extractall(os.getenv('HOME')+'/.var/app/io.github.axtloss.davinciresolver/data/installerCache')
+            
+    def get_src_url(self):
+
+        cookies = {
+            '_ga': 'GA1.2.1849503966.1518103294',
+            '_gid': 'GA1.2.953840595.1518103294',
+        }
+
+        headers = {
+            'Host': 'www.blackmagicdesign.com',
+            'Accept': 'application/json, text/plain, */*',
+            'Origin': 'https://www.blackmagicdesign.com',
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.75 Safari/537.36',
+            'Content-Type': 'application/json;charset=UTF-8',
+            'Referer': 'https://www.blackmagicdesign.com/support/download/' + self.referrerid + '/Linux',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'Accept-Language': 'en-US,en;q=0.9',
+            'Cookie': '_ga=GA1.2.1849503966.1518103294; _gid=GA1.2.953840595.1518103294',
+            'Authority': 'www.blackmagicdesign.com',
+        }
+
+        print(self.userdata.get_json())
+
+        response = requests.post(self.url.replace("%ID%", self.downloadID), cookies=cookies, headers=headers, data=self.userdata.get_json())
+        return response.content.decode('utf-8')
             

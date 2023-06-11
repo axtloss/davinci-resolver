@@ -8,4 +8,8 @@
     <file preprocess="xml-stripblanks">windows/davinciInstallerWindow.ui</file>
     <file>style.css</file>
   </gresource>
+  <gresource prefix="/io/github/axtloss/davinciresolver/icons/scalable/actions/">
+    <file preprocess="xml-stripblanks" alias="screen-privacy7-disabled-symbolic.svg">../data/icons/hicolor/symbolic/actions/screen-privacy7-disabled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks" alias="screen-privacy7-symbolic.svg">../data/icons/hicolor/symbolic/actions/screen-privacy7-symbolic.svg</file>
+  </gresource>
 </gresources>
