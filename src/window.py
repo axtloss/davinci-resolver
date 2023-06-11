@@ -25,6 +25,7 @@ from gi.repository import Adw
 from gi.repository import Gtk
 from davinci_resolver.widgets.entry import DavinciEntry
 from davinci_resolver.widgets.tag import DavinciTag
+from davinci_resolver.windows.davinciInstallerWindow import DavinciInstallerWindow
 
 @Gtk.Template(resource_path='/io/github/axtloss/davinciresolver/window.ui')
 class DavinciResolverWindow(Adw.ApplicationWindow):
@@ -35,6 +36,8 @@ class DavinciResolverWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.parse_versions_file()
+        installer=DavinciInstallerWindow(self, **kwargs)
+        installer.present()
 
     def parse_versions_file(self):
         content=""
