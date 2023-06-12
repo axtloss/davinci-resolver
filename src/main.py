@@ -53,10 +53,13 @@ class DavinciResolverApplication(Adw.Application):
         about = Adw.AboutWindow(transient_for=self.props.active_window,
                                 application_name='davinci-resolver',
                                 application_icon='io.github.axtloss.davinciresolver',
-                                developer_name='Unknown',
+                                developer_name='axtlos',
                                 version='0.1.0',
-                                developers=['Unknown'],
-                                copyright='© 2023 Unknown')
+                                developers=['axtlos https://axtlos.neocities.org'],
+                                artists=['Kainoa https://calckey.social/@kainoa'],
+                                license_type=Gtk.License.GPL_3_0_ONLY,
+                                issue_url="https://github.com/axtloss/davinci-resolver/issues",
+                                copyright='© 2023 axtlos')
         about.present()
 
     def on_preferences_action(self, widget, _):

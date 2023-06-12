@@ -12,4 +12,8 @@
     <file preprocess="xml-stripblanks" alias="screen-privacy7-disabled-symbolic.svg">../data/icons/hicolor/symbolic/actions/screen-privacy7-disabled-symbolic.svg</file>
     <file preprocess="xml-stripblanks" alias="screen-privacy7-symbolic.svg">../data/icons/hicolor/symbolic/actions/screen-privacy7-symbolic.svg</file>
   </gresource>
+  <gresource prefix="/io/github/axtloss/davinciresolver/icons/scalable/apps/">
+    <file preprocess="xml-stripblanks" alias="io.github.axtloss.davinciresolver-symbolic.svg">../data/icons/hicolor/symbolic/apps/io.github.axtloss.davinciresolver-symbolic.svg</file>
+    <file preprocess="xml-stripblanks" alias="io.github.axtloss.davinciresolver.svg">../data/icons/hicolor/scalable/apps/io.github.axtloss.davinciresolver.svg</file>
+  </gresource>
 </gresources>

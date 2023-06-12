@@ -16,12 +16,9 @@
           </object>
         </property>
         <child type="end">
-          <object class="GtkButton">
-            <property name="icon-name">folder-download-symbolic</property>
-            <style>
-              <class name="flat"/>
-              <class name="download"/>
-            </style>
+          <object class="GtkMenuButton">
+            <property name="icon-name">open-menu-symbolic</property>
+            <property name="menu-model">primary_menu</property>
           </object>
         </child>
       </object>
