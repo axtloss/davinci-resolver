@@ -3,7 +3,8 @@ windowsdir = join_paths(pkgdatadir, 'davinci_resolver/windows')
 
 window_sources = [
   '__init__.py',
-  'davinciInstallerWindow.py'
+  'davinciInstallerWindow.py',
+  'davinciInstallationView.py'
 ]
 
 install_data(window_sources, install_dir: windowsdir)

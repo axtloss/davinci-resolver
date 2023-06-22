@@ -24,6 +24,7 @@ from gi.repository import Adw
 from gi.repository import Gtk
 from davinci_resolver.classes.userData import UserData
 from davinci_resolver.utils.davinciInstaller import DavinciInstaller
+from davinci_resolver.windows.davinciInstallationView import DavinciInstallationView
 
 @Gtk.Template(resource_path='/io/github/axtloss/davinciresolver/windows/davinciInstallerWindow.ui')
 class DavinciInstallerWindow(Adw.ApplicationWindow):
@@ -46,6 +47,8 @@ class DavinciInstallerWindow(Adw.ApplicationWindow):
     countrySelection: Adw.ComboRow = Gtk.Template.Child()
     cityEntry: Adw.EntryRow = Gtk.Template.Child()
 
+    installationView: DavinciInstallationView
+
     downloadID: str
     url: str
 
@@ -61,6 +64,8 @@ class DavinciInstallerWindow(Adw.ApplicationWindow):
         self.anonymousRegister.connect('clicked', self.on_anonymous_register)
         self.populate_country()
 
+        self.installationView = DavinciInstallationView(self)
+        self.installerStack.add_child(self.installationView)
 
     def register(self, _):
         self.installerStack.set_transition_type(Gtk.StackTransitionType.SLIDE_LEFT)
@@ -74,8 +79,9 @@ class DavinciInstallerWindow(Adw.ApplicationWindow):
 
     def on_anonymous_register(self, _):
         installer = DavinciInstaller(self.downloadID, None, self.url)
-        installer.download_installer()
-        installer.extract_installer_zip()
+        self.installerStack.set_transition_type(Gtk.StackTransitionType.SLIDE_LEFT)
+        self.installerStack.set_visible_child(self.installationView)
+        self.installationView.begin_installation(installer)
 
     def on_register(self, _):
         selected_country = self.countries.get_string(self.countrySelection.get_selected())
@@ -90,8 +96,11 @@ class DavinciInstallerWindow(Adw.ApplicationWindow):
                         product="DaVinci Resolve")
 
         installer = DavinciInstaller(self.downloadID, data, self.url)
-        installer.download_installer()
-        installer.extract_installer_zip()
+        #installer.download_installer()
+        #installer.extract_installer_zip()
+        self.installerStack.set_transition_type(Gtk.StackTransitionType.SLIDE_LEFT)
+        self.installerStack.set_visible_child(self.installationView)
+        self.installationView.begin_installation(installer)
 
 
     def populate_country(self):

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="Adw" version="1.0"/>
+  <template class="DavinciInstallationView" parent="AdwBin">
+    <property name="halign">fill</property>
+    <property name="valign">fill</property>
+    <property name="vexpand">true</property>
+    <property name="hexpand">true</property>
+    <child>
+      <object class="AdwStatusPage">
+        <property name="halign">fill</property>
+        <property name="valign">fill</property>
+        <property name="vexpand">true</property>
+        <property name="hexpand">true</property>
+        <property name="title">Installing</property>
+        <property name="description">Installing DaVinci Resolve</property>
+        <property name="child">
+          <object class="AdwPreferencesGroup">
+            <child>
+              <object class="AdwActionRow">
+                <property name="title">Download Installer</property>
+                <property name="subtitle">Download the DaVinci Resolve Installer</property>
+                <property name="icon-name"></property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="spacing">10</property>
+                    <child>
+                      <object class="GtkLabel" id="downloadProgress">
+                        <property name="label">00%</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkSpinner" id="downloadSpinner">
+                        <property name="spinning">true</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow">
+                <property name="title">Extract Installer</property>
+                <property name="subtitle">Extract the DaVinci Resolve Installer</property>
+                <property name="icon-name">content-loading-symbolic</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="spacing">10</property>
+                    <child>
+                      <object class="GtkLabel" id="extractProgress">
+                        <property name="visible">false</property>
+                        <property name="label">00%</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkSpinner" id="extractSpinner">
+                        <property name="spinning">false</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwExpanderRow" id="installExpander">
+                <property name="title">Install DaVinci Resolve</property>
+                <property name="subtitle">Installing the extracted files</property>
+                <property name="expanded">false</property>
+                <property name="icon-name">content-loading-symbolic</property>
+                <child>
+                  <object class="AdwActionRow">
+                    <property name="title">Copy Required Directories</property>
+                    <child>
+                      <object class="GtkSpinner" id="copySpinner">
+                        <property name="spinning">false</property>
+                        <property name="margin-end">10</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImage" id="copyIcon">
+                        <property name="icon-name">content-loading-symbolic</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwActionRow">
+                    <property name="title">Add BlackmagicRAW utilities</property>
+                    <child>
+                      <object class="GtkSpinner" id="rawUtilitiesSpinner">
+                        <property name="spinning">false</property>
+                        <property name="margin-end">10</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImage" id="rawUtilitiesIcon">
+                        <property name="icon-name">content-loading-symbolic</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwActionRow">
+                    <property name="title">Create Desktop Entries</property>
+                    <child>
+                      <object class="GtkSpinner" id="desktopSpinner">
+                        <property name="spinning">false</property>
+                        <property name="margin-end">10</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImage" id="desktopIcon">
+                        <property name="icon-name">content-loading-symbolic</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </property>
+      </object>
+    </child>
+  </template>
+</interface>

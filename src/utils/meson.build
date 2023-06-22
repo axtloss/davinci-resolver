@@ -4,6 +4,7 @@ utilsdir = join_paths(pkgdatadir, 'davinci_resolver/utils')
 utils_sources = [
   '__init__.py',
   'davinciInstaller.py',
+  'runAsync.py'
 ]
 
 install_data(utils_sources, install_dir: utilsdir)

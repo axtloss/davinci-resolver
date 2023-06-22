@@ -52,7 +52,7 @@ class DavinciInstaller:
         self.url = url
         self.download_url = self.get_src_url()
 
-    def download_installer(self):
+    def download_installer(self, on_progress):
         os.mkdir(os.getenv('HOME')+'/.var/app/io.github.axtloss.davinciresolver/data/installerCache')
         file_name=os.getenv('HOME')+'/.var/app/io.github.axtloss.davinciresolver/data/installerCache/davinci.zip'
         with open(file_name, "wb") as f:
@@ -68,9 +68,8 @@ class DavinciInstaller:
                 for data in response.iter_content(chunk_size=4096):
                     dl += len(data)
                     f.write(data)
-                    done = int(50 * dl / total_length)
-                    sys.stdout.write("\r[%s%s]" % ('=' * done, ' ' * (50-done)) )
-                    sys.stdout.flush()
+                    done = int((dl / total_length) * 100)
+                    on_progress(str(done))
 
 
     def extract_installer_zip(self):

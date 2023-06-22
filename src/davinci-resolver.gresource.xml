@@ -6,11 +6,13 @@
     <file preprocess="xml-stripblanks">widgets/entry.ui</file>
     <file preprocess="xml-stripblanks">widgets/tag.ui</file>
     <file preprocess="xml-stripblanks">windows/davinciInstallerWindow.ui</file>
+    <file preprocess="xml-stripblanks">windows/davinciInstallationView.ui</file>
     <file>style.css</file>
   </gresource>
   <gresource prefix="/io/github/axtloss/davinciresolver/icons/scalable/actions/">
     <file preprocess="xml-stripblanks" alias="screen-privacy7-disabled-symbolic.svg">../data/icons/hicolor/symbolic/actions/screen-privacy7-disabled-symbolic.svg</file>
     <file preprocess="xml-stripblanks" alias="screen-privacy7-symbolic.svg">../data/icons/hicolor/symbolic/actions/screen-privacy7-symbolic.svg</file>
+    <file preprocess="xml-stripblanks" alias="test-pass-symbolic.svg">../data/icons/hicolor/symbolic/actions/test-pass-symbolic.svg</file>
   </gresource>
   <gresource prefix="/io/github/axtloss/davinciresolver/icons/scalable/apps/">
     <file preprocess="xml-stripblanks" alias="io.github.axtloss.davinciresolver-symbolic.svg">../data/icons/hicolor/symbolic/apps/io.github.axtloss.davinciresolver-symbolic.svg</file>
