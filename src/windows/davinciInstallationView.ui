@@ -18,10 +18,10 @@
         <property name="child">
           <object class="AdwPreferencesGroup">
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwActionRow" id="downloadRow">
                 <property name="title">Download Installer</property>
                 <property name="subtitle">Download the DaVinci Resolve Installer</property>
-                <property name="icon-name"></property>
+                <property name="icon-name">content-loading-symbolic</property>
                 <child>
                   <object class="GtkBox">
                     <property name="spacing">10</property>
@@ -32,7 +32,7 @@
                     </child>
                     <child>
                       <object class="GtkSpinner" id="downloadSpinner">
-                        <property name="spinning">true</property>
+                        <property name="spinning">false</property>
                       </object>
                     </child>
                   </object>
@@ -40,7 +40,7 @@
               </object>
             </child>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwActionRow" id="extractRow">
                 <property name="title">Extract Installer</property>
                 <property name="subtitle">Extract the DaVinci Resolve Installer</property>
                 <property name="icon-name">content-loading-symbolic</property>
@@ -49,8 +49,7 @@
                     <property name="spacing">10</property>
                     <child>
                       <object class="GtkLabel" id="extractProgress">
-                        <property name="visible">false</property>
-                        <property name="label">00%</property>
+                        <property name="label"></property>
                       </object>
                     </child>
                     <child>

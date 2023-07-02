@@ -30,6 +30,13 @@ pkgdatadir = '@pkgdatadir@'
 localedir = '@localedir@'
 
 sys.path.insert(1, pkgdatadir)
+
+os.unsetenv("GTK_THEME")
+
+if not os.path.exists('/.flatpak-info'):
+    print("Nuh Uh!")
+    sys.exit(0) # make sure they don't get a proper returncode :troll:
+
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 locale.bindtextdomain('davinci-resolver', localedir)
 locale.textdomain('davinci-resolver')

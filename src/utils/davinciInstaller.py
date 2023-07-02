@@ -21,6 +21,7 @@ import sys
 import requests
 import zipfile
 from davinci_resolver.classes.userData import UserData
+from davinci_resolver.utils.zipFile import ZipFileCallback
 
 class DavinciInstaller:
 
@@ -52,32 +53,7 @@ class DavinciInstaller:
         self.url = url
         self.download_url = self.get_src_url()
 
-    def download_installer(self, on_progress):
-        os.mkdir(os.getenv('HOME')+'/.var/app/io.github.axtloss.davinciresolver/data/installerCache')
-        file_name=os.getenv('HOME')+'/.var/app/io.github.axtloss.davinciresolver/data/installerCache/davinci.zip'
-        with open(file_name, "wb") as f:
-            print("Downloading %s" % file_name)
-            response = requests.get(self.download_url, stream=True)
-            total_length = response.headers.get('content-length')
-
-            if total_length is None: # no content length header
-                f.write(response.content)
-            else:
-                dl = 0
-                total_length = int(total_length)
-                for data in response.iter_content(chunk_size=4096):
-                    dl += len(data)
-                    f.write(data)
-                    done = int((dl / total_length) * 100)
-                    on_progress(str(done))
-
-
-    def extract_installer_zip(self):
-        with zipfile.ZipFile(os.getenv('HOME')+'/.var/app/io.github.axtloss.davinciresolver/data/installerCache/davinci.zip', 'r') as zip_file:
-            zip_file.extractall(os.getenv('HOME')+'/.var/app/io.github.axtloss.davinciresolver/data/installerCache')
-            
     def get_src_url(self):
-
         cookies = {
             '_ga': 'GA1.2.1849503966.1518103294',
             '_gid': 'GA1.2.953840595.1518103294',
@@ -100,4 +76,39 @@ class DavinciInstaller:
 
         response = requests.post(self.url.replace("%ID%", self.downloadID), cookies=cookies, headers=headers, data=self.userdata.get_json())
         return response.content.decode('utf-8')
-            
+
+    def download_installer(self, on_progress):
+        on_progress("100")
+        return
+        os.mkdir(os.getenv('XDG_DATA_HOME')+'/installerCache')
+        file_name=os.getenv('XDG_DATA_HOME')+'/installerCache/davinci.zip'
+        with open(file_name, "wb") as f:
+            print("Downloading %s" % file_name)
+            response = requests.get(self.download_url, stream=True)
+            total_length = response.headers.get('content-length')
+
+            if total_length is None: # no content length header
+                f.write(response.content)
+            else:
+                dl = 0
+                total_length = int(total_length)
+                for data in response.iter_content(chunk_size=4096):
+                    dl += len(data)
+                    f.write(data)
+                    done = int((dl / total_length) * 100)
+                    on_progress(str(done))
+
+
+    def extract_installer_zip(self, on_progress):
+        def calculate_progress(current: int, total: int):
+            progress=float(current) / total
+            progress=round(progress*100)
+            return str(progress)
+
+        with ZipFileCallback(os.getenv('XDG_DATA_HOME')+'/installerCache/davinci.zip', 'r') as zip_file:
+            zip_file.extractall(os.getenv('XDG_DATA_HOME')+'/installerCache', progress_callback=lambda current, total: on_progress(calculate_progress(current, total)))
+
+
+   # def copy_directories(self):
+
+   

@@ -109,11 +109,11 @@ class DavinciInstallerWindow(Adw.ApplicationWindow):
         try:
             for line in request.urlopen("https://raw.githubusercontent.com/axtloss/davinci-resolver/tmpdev/countries.json"):
                 content=content+line.decode('utf-8')
-            with open(os.getenv('HOME')+'/.var/app/io.github.axtloss.davinciresolver/data/countries.json', 'w') as file:
+            with open(os.getenv('XDG_DATA_HOME')+'/countries.json', 'w') as file:
                 file.write(content)
         except urlerr.URLError:
             print('no internet, using cached file')
-            with open(os.getenv('HOME')+'/.var/app/io.github.axtloss.davinciresolver/data/countries.json', 'r') as file:
+            with open(os.getenv('XDG_DATA_HOME')+'/countries.json', 'r') as file:
                 content=file.read()
 
         self.parsed = json.loads(content)

@@ -27,9 +27,11 @@ class DavinciInstallationView(Adw.Bin):
 
     __gtype_name__ = "DavinciInstallationView"
 
+    downloadRow: Adw.ActionRow = Gtk.Template.Child()
     downloadProgress: Gtk.Label = Gtk.Template.Child()
     downloadSpinner: Gtk.Spinner = Gtk.Template.Child()
 
+    extractRow: Adw.ActionRow = Gtk.Template.Child()
     extractProgress: Gtk.Label = Gtk.Template.Child()
     extractSpinner: Gtk.Spinner = Gtk.Template.Child()
 
@@ -48,15 +50,30 @@ class DavinciInstallationView(Adw.Bin):
         super().__init__(**kwargs)
         self.window = window
 
+    def __update_download_progress(self, progress: str):
+        GLib.idle_add(self.downloadProgress.set_label, progress+"%")
 
-    def update_download_progress(self, progress: str):
-        GLib.idle_add(self.downloadProgress.set_label,progress+"%")
+    def __update_extraction_progress(self, progress: str):
+        GLib.idle_add(self.extractProgress.set_label, progress+"%")
 
-    def download_resolve(self):
-        self.installer.download_installer(on_progress=self.update_download_progress)
+    def __download_resolve(self):
+        GLib.idle_add(self.downloadRow.set_icon_name, "")
+        GLib.idle_add(self.downloadSpinner.set_spinning, True)
+        self.installer.download_installer(on_progress=self.__update_download_progress)
+        GLib.idle_add(self.downloadSpinner.set_spinning, False)
+        GLib.idle_add(self.downloadRow.set_icon_name, "test-pass-symbolic")
+
+        self.__extract_resolve()
+
+    def __extract_resolve(self):
+        GLib.idle_add(self.extractRow.set_icon_name, "")
+        GLib.idle_add(self.extractSpinner.set_spinning, True)
+        self.installer.extract_installer_zip(on_progress=self.__update_extraction_progress)
+        GLib.idle_add(self.extractSpinner.set_spinning, False)
+        GLib.idle_add(self.extractRow.set_icon_name, "test-pass-symbolic")
 
     def begin_installation(self, installer: DavinciInstaller):
         self.installer = installer
-        RunAsync(self.download_resolve)
+        RunAsync(self.__download_resolve)
 
         

@@ -23,6 +23,9 @@ from urllib import request
 from urllib import error as urlerr
 from gi.repository import Adw
 from gi.repository import Gtk
+from gi.repository import Gio
+from gi.repository import Xdp
+from gi.repository import XdpGtk4
 from davinci_resolver.widgets.entry import DavinciEntry
 from davinci_resolver.widgets.tag import DavinciTag
 from davinci_resolver.windows.davinciInstallerWindow import DavinciInstallerWindow
@@ -36,6 +39,38 @@ class DavinciResolverWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.parse_versions_file()
+        portal = Xdp.Portal()
+        icon="org.gnome.Adwaita1.Demo-symbolic"
+        _icon=Gio.Icon.new_for_string("test")
+
+        icon_v = _icon.serialize()
+        #token = portal.dynamic_launcher_prepare_install("test", icon_v)
+        portal.dynamic_launcher_prepare_install(None, "title", icon_v, Xdp.LauncherType.APPLICATION, None, True, True, None, self.prepare_install_cb)
+        #portal.dynamic_launcher_install(
+        #    token,
+        #    "test.desktop",
+        #    """
+        #    [Desktop Entry]
+        #    Exec=test
+        #    Type=Application
+        #    Terminal=false
+        #    Categories=Application;
+        #    Comment=Launch test using Bottles.
+        #    Actions=Configure;
+        #    [Desktop Action Configure]
+        #        Name=Configure in Bottles
+        #    Exec=test
+        #    """
+        #    ).encode("utf-8")
+
+    def prepare_install_cb(self, result, guh):
+        portal = Xdp.Portal()
+        print("here")
+        print(guh)
+
+        ret = portal.dynamic_launcher_prepare_install_finish(guh)
+        print(result)
+        print(ret)
 
     def parse_versions_file(self):
         content=""
