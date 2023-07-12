@@ -1,8 +1,8 @@
 {
     "app-id" : "io.github.axtloss.davinciresolver",
-    "runtime" : "org.gnome.Platform",
-    "runtime-version" : "44",
-    "sdk" : "org.gnome.Sdk",
+    "runtime" : "org.freedesktop.Platform",
+    "runtime-version" : "22.08",
+    "sdk" : "org.freedesktop.Sdk",
     "command" : "davinci-resolver",
     "finish-args" : [
         "--share=network",
@@ -23,6 +23,7 @@
         "*.a"
     ],
     "modules" : [
+	"shared-modules/glu/glu-9.json",
     	{
             "name": "python3-requests",
             "buildsystem": "simple",
@@ -56,7 +57,7 @@
                   "sha256": "8fefa2a1a1365bf5520aac41836fbee479da67864514bdb821f31ce07ce65349"
                 }
             ]
-    	},
+    	}
     	{
     	"name" : "libportal",
     	"buildsystem" : "meson",

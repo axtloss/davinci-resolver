@@ -78,8 +78,6 @@ class DavinciInstaller:
         return response.content.decode('utf-8')
 
     def download_installer(self, on_progress):
-        on_progress("100")
-        return
         os.mkdir(os.getenv('XDG_DATA_HOME')+'/installerCache')
         file_name=os.getenv('XDG_DATA_HOME')+'/installerCache/davinci.zip'
         with open(file_name, "wb") as f:
